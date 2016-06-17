@@ -1,0 +1,13 @@
+CREATE TABLE `Log` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Message` mediumtext,
+  `Level` int(11) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Node` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Type` int(11) NOT NULL,
+  `Body` longtext,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

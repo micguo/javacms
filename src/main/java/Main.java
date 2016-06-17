@@ -1,9 +1,10 @@
+import Service.DbConnection;
+import Service.Log;
+
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Keepsmile on 2016-06-07.
@@ -17,10 +18,7 @@ public class Main {
 
         Connection link = null;
         try {
-            String url = "jdbc:mysql://127.0.0.1:8083/javacms";
-            String username = "root";
-            String password = "root";
-            link = DriverManager.getConnection(url, username, password);
+            link = DbConnection.getConnection();
 
             Statement statement = link.createStatement();
 
@@ -49,7 +47,7 @@ public class Main {
                     break;
                 case 2:
                     Render.renderSet(nodeSet);
-                    System.out.print("haha");
+                    Log.error("waht???");
                     break;
                 case 3:
                     retry = false;
@@ -75,14 +73,15 @@ public class Main {
      */
     private static Integer listOptions()
     {
+        ResourceBundle rc = ResourceBundle.getBundle("message", new Locale("en"));
         boolean retry = true;
         int option = 0;
         Scanner s = new Scanner(System.in);
         while (retry) {
-            System.out.println("Choose an option:");
-            System.out.println("1. Add new node.");
-            System.out.println("2. List node.");
-            System.out.println("3. Exit.");
+            System.out.println(Encoder.ISO2UTF8(rc.getString("Choose_Option"))+".");
+            System.out.println("1. " +  Encoder.ISO2UTF8(rc.getString("New_Node"))+".");
+            System.out.println("2. " +  Encoder.ISO2UTF8(rc.getString("List_Node"))+".");
+            System.out.println("3. " +  Encoder.ISO2UTF8(rc.getString("Exit"))+".");
             if (s.hasNextLine()) {
                 try {
                     option = Integer.parseInt(s.nextLine());
