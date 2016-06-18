@@ -14,20 +14,20 @@ public class Log {
     }
 
 
-    static public void notice(String message)
+    static public void notice(Object message)
     {
-        Log.log(message, level.LOG_NOTICE);
+        Log.log(message.toString(), level.LOG_NOTICE);
     }
 
 
-    static public void warning(String message)
+    static public void warning(Object message)
     {
-        Log.log(message, level.LOG_WARNING);
+        Log.log(message.toString(), level.LOG_WARNING);
     }
 
-    static public void error(String message)
+    static public void error(Object message)
     {
-        Log.log(message, level.LOG_ERROR);
+        Log.log(message.toString(), level.LOG_ERROR);
     }
 
     static private void log(String message, level level)
@@ -35,6 +35,7 @@ public class Log {
         Connection conn = DbConnection.getConnection();
         try {
             PreparedStatement stat = conn.prepareStatement("INSERT INTO Log (message, level) VALUES (?, ?)");
+            System.out.println("Log:" + message);
             stat.setString(1, message);
             stat.setInt(2, level.ordinal());
             stat.execute();

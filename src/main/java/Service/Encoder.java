@@ -1,3 +1,5 @@
+package Service;
+
 import java.io.UnsupportedEncodingException;
 
 public abstract class Encoder {
@@ -7,7 +9,7 @@ public abstract class Encoder {
         try {
             rs = new String(text.getBytes("ISO-8859-1"), "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            System.out.print(e);
+            Log.error(e.toString());
         }
 
         return rs;
